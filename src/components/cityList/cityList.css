@@ -17,6 +17,7 @@
 .cityCardWrapper {
   width: 30%;
   text-align: center;
+  margin-bottom: 35px;
 }
 @media (max-width: 868px) {
   .cityCardWrapper {

@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { ICity, IFullCity } from "../../types/city_types";
 
+import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -51,30 +52,34 @@ const CityCard = ({ city, className }: Props) => {
 
   return (
     <div className={className}>
-      <h3>
-        {stateCity?.name ? stateCity.name : null}
-        {"Kyiv"}
-      </h3>
-      <div>
-        {stateCity?.main?.temp ? `${stateCity.main.temp - 273}  \u00b0` : null}
-        {`273 \u00b0`}
-      </div>
-      <Button
-        variant="contained"
-        onClick={updateCity}
-        color={"primary"}
-        className={classes.button}
-      >
-        Update
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={deleteCity}
-        color="secondary"
-        startIcon={<DeleteIcon />}
-      >
-        Delete
-      </Button>
+      <Card>
+        <h3>
+          {stateCity?.name ? stateCity.name : null}
+          {"Kyiv"}
+        </h3>
+        <div>
+          {stateCity?.main?.temp
+            ? `${Math.round(stateCity.main.temp) - 273}  \u00b0`
+            : null}
+          {`273 \u00b0`}
+        </div>
+        <Button
+          variant="contained"
+          onClick={updateCity}
+          color={"primary"}
+          className={classes.button}
+        >
+          Update
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={deleteCity}
+          color="secondary"
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+      </Card>
     </div>
   );
 };
