@@ -1,10 +1,30 @@
 .tableWrapper {
 }
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .pointer {
   cursor: pointer;
+}
+.cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cityCardWrapper {
+  width: 30%;
+  text-align: center;
+}
+@media (max-width: 868px) {
+  .cityCardWrapper {
+    width: 45%;
+  }
+}
+@media (max-width: 568px) {
+  .cityCardWrapper {
+    width: 100%;
+  }
 }
