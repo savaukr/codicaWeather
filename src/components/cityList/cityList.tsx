@@ -1,79 +1,84 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
+import { normalizeData } from "../../helpers/normalizeData";
+
+import { IFullCity } from "../../types/city_types";
 import { useTypedSelector } from "../../hooks/usedTypedSelector";
 import { useActions } from "../../hooks/useActions";
 
 import CityCard from "../cityCard/cityCard";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { Container, CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 
 import "./cityList.css";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 const CityList = () => {
-  const classes = useStyles();
   const { cities, error, loading } = useTypedSelector((state) => state.city);
+  const [viewedCitiesIds, setViewedCitiesIds] = useState<number[] | null>();
   const { fetchCities } = useActions();
 
   useEffect(() => {
     fetchCities();
   }, []);
 
+  const [citiesNorm, citiesNormIds] = useMemo(
+    () => normalizeData(cities),
+    [cities]
+  );
+
+  useEffect(() => {
+    const ids = localStorage.getItem("viewedCitiesIds");
+    if (ids) setViewedCitiesIds(JSON.parse(ids));
+  }, []);
+
+  const addCitiesHandler = (ids: number[]) => {
+    if (viewedCitiesIds) {
+      setViewedCitiesIds([...viewedCitiesIds, ...ids]);
+      localStorage.setItem(
+        "viewedCitiesIds",
+        JSON.stringify([...viewedCitiesIds, ...ids])
+      );
+    } else {
+      setViewedCitiesIds(ids);
+      localStorage.setItem("viewedCitiesIds", JSON.stringify(ids));
+    }
+  };
+
+  const deleteCitiesHandler = (cityId: number) => {
+    if (viewedCitiesIds) {
+      const filterIds = viewedCitiesIds.filter((id) => id !== cityId);
+      setViewedCitiesIds(filterIds);
+      localStorage.setItem("viewedCitiesIds", JSON.stringify(filterIds));
+    }
+  };
+
   return (
     <div className="tableWrapper">
       <div className="container">
+        <div className="addCity">
+          <button
+            type="button"
+            onClick={() => {
+              if (citiesNormIds) addCitiesHandler(citiesNormIds);
+            }}
+          >
+            add
+          </button>
+        </div>
         <h1>Cities list</h1>
-        {loading ? <CircularProgress /> : ""}
+        {loading ? <CircularProgress /> : null}
         {error ? <h1>Sorry, an error occurred</h1> : null}
         <div className="cards">
-          {!error && !loading
-            ? cities.map((city) => (
+          {!error && !loading && viewedCitiesIds
+            ? viewedCitiesIds.map((id) => (
                 <CityCard
-                  city={city}
-                  key={city.id}
+                  city={citiesNorm[id]}
+                  key={citiesNorm[id].id}
                   className="cityCardWrapper"
+                  deleteCitiesHandler={deleteCitiesHandler}
                 />
               ))
-            : // <TableContainer component={Paper}>
-              //   <Table
-              //     className={classes.table}
-              //     size="small"
-              //     aria-label="a dense table"
-              //   >
-              //     <TableHead>
-              //       <TableRow>
-              //         <TableCell align="center">id</TableCell>
-              //         <TableCell align="center">name</TableCell>
-              //         <TableCell align="center">state</TableCell>
-              //         <TableCell align="center">country</TableCell>
-              //       </TableRow>
-              //     </TableHead>
-              //     <TableBody>
-              //       {cities.map((city) => (
-              //         <TableRow key={city.id} className={"pointer"}>
-              //           <TableCell align="center">{city.id}</TableCell>
-              //           <TableCell align="center">{city.name}</TableCell>
-              //           <TableCell align="center">{city.state}</TableCell>
-              //           <TableCell align="center">{city.country}</TableCell>
-              //         </TableRow>
-              //       ))}
-              //     </TableBody>
-              //   </Table>
-              // </TableContainer>
-              null}
+            : null}
         </div>
       </div>
     </div>

@@ -5,14 +5,14 @@ import { Button } from "@material-ui/core";
 
 import { useParams } from "react-router-dom";
 
-import "./city.css";
+import "./cityDetails.css";
 import { ICity } from "../../types/city_types";
 
 interface CityParams {
   id: string;
 }
 
-const City = () => {
+const CityDetails = () => {
   const [stateCity, setCity] = useState<ICity | null>(null);
   const params = useParams();
 
@@ -31,4 +31,4 @@ const City = () => {
   );
 };
 
-export default City;
+export default CityDetails;
