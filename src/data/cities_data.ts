@@ -1,5 +1,5 @@
-import { City } from "../types/city_types";
-export const cities: City[] = [
+import { ICity } from "../types/city_types";
+export const cities: ICity[] = [
   {
     id: 461727,
     name: "Olenevka",
