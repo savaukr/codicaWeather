@@ -11,7 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import "./cityCard.css";
 
-const api_key = "4b456c4b39aae41889a3f1fa952bb6ff";
+const api_key = process.env.REACT_APP_WEATHER_KEY;
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -70,6 +70,7 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
               {fullCity?.main?.temp
                 ? `${Math.round(fullCity.main.temp) - 273}  \u00b0`
                 : null}
+              C
             </div>
             <div>
               {fullCity?.weather[0] ? (
@@ -85,7 +86,7 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
                 event.stopPropagation();
                 updateCity();
               }}
-              color={"primary"}
+              color="primary"
               className={classes.button}
             >
               Update

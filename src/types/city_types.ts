@@ -4,6 +4,12 @@ export enum CityActionTypes {
   FETCH_CITIES_ERROR = "FETCH_CITIES_ERROR",
 }
 
+export enum FullCityActionTypes {
+  FETCH_FULL_CITY = "FETCH_FULL_CITY",
+  FETCH_FULL_CITY_SUCCESS = "FETCH_FULL_CITY_SUCCESS",
+  FETCH_FULL_CITY_ERROR = "FETCH_FULL_CITY_ERROR",
+}
+
 export interface ICity {
   id: number;
   name: string;
@@ -14,6 +20,29 @@ export interface ICity {
     lat: number;
   };
 }
+
+export interface CityState {
+  cities: ICity[];
+  loading: boolean;
+  error: null | string;
+}
+interface FetchCityAction {
+  type: CityActionTypes.FETCH_CITIES;
+}
+interface FetchCitySuccessAction {
+  type: CityActionTypes.FETCH_CITIES_SUCCESS;
+  payload: ICity[];
+}
+interface FetchCityErrorAction {
+  type: CityActionTypes.FETCH_CITIES_ERROR;
+  payload: string;
+}
+
+export type CityAction =
+  | FetchCityAction
+  | FetchCitySuccessAction
+  | FetchCityErrorAction;
+
 export interface IFullCity {
   coord: {
     lon: number;
@@ -60,24 +89,23 @@ export interface IFullCity {
   cod: number;
 }
 
-export interface CityState {
-  cities: ICity[];
+export interface FullCityState {
+  fullCity: IFullCity | null;
   loading: boolean;
   error: null | string;
 }
-interface FetchCityAction {
-  type: CityActionTypes.FETCH_CITIES;
+interface FetchFullCityAction {
+  type: FullCityActionTypes.FETCH_FULL_CITY;
 }
-interface FetchCitySuccessAction {
-  type: CityActionTypes.FETCH_CITIES_SUCCESS;
-  payload: ICity[];
+interface FetchFullCitySuccessAction {
+  type: FullCityActionTypes.FETCH_FULL_CITY_SUCCESS;
+  payload: IFullCity;
 }
-interface FetchCityErrorAction {
-  type: CityActionTypes.FETCH_CITIES_ERROR;
+interface FetchFullCityErrorAction {
+  type: FullCityActionTypes.FETCH_FULL_CITY_ERROR;
   payload: string;
 }
-
-export type CityAction =
-  | FetchCityAction
-  | FetchCitySuccessAction
-  | FetchCityErrorAction;
+export type FullCityAction =
+  | FetchFullCityAction
+  | FetchFullCitySuccessAction
+  | FetchFullCityErrorAction;

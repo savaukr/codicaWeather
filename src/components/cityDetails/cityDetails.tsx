@@ -1,32 +1,64 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { useActions } from "../../hooks/useActions";
+import { useTypedSelector } from "../../hooks/usedTypedSelector";
 
 import { Button } from "@material-ui/core";
-
-import { useParams } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 
 import "./cityDetails.css";
-import { ICity } from "../../types/city_types";
-
-interface CityParams {
-  id: string;
-}
 
 const CityDetails = () => {
-  const [stateCity, setCity] = useState<ICity | null>(null);
+  const navigate = useNavigate();
+  const { fullCity, error, loading } = useTypedSelector(
+    (state) => state.fullCity
+  );
+  const { fetchFullCity } = useActions();
   const params = useParams();
 
-  const updateCity = () => {
-    console.log("update");
-  };
+  useEffect(() => {
+    fetchFullCity(params?.id ? params.id : null);
+  }, []);
 
   return (
     <div className={"cityWrapper"}>
-      <h1>{stateCity?.name}</h1>
-      <Button variant="outlined" onClick={updateCity} color={"primary"}>
-        Update
-      </Button>
-      <div>City item: {params.id}</div>;
+      {error ? <h1>Sorry, an error occurred</h1> : null}
+      {loading ? <CircularProgress /> : null}
+      {!error && !loading ? (
+        <>
+          <Button
+            variant="outlined"
+            size="large"
+            color="default"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Back
+          </Button>
+          <h1>{fullCity?.name}</h1>
+
+          <Card>
+            <h3>{fullCity?.name ? fullCity.name : null}</h3>
+            <div>
+              {fullCity?.main?.temp
+                ? `${Math.round(fullCity.main.temp) - 273}  \u00b0`
+                : null}
+              C
+            </div>
+            <div>
+              {fullCity?.weather[0] ? (
+                <img
+                  src={`https://openweathermap.org/img/wn/${fullCity.weather[0].icon}@2x.png`}
+                />
+              ) : null}
+            </div>
+            <div>{fullCity?.weather ? fullCity.weather[0].main : null}</div>
+          </Card>
+        </>
+      ) : null}
     </div>
   );
 };

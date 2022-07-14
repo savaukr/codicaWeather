@@ -2,10 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 
 import { normalizeData } from "../../helpers/normalizeData";
 
-import { IFullCity } from "../../types/city_types";
 import { useTypedSelector } from "../../hooks/usedTypedSelector";
 import { useActions } from "../../hooks/useActions";
 
+import AddCity from "../addCity/addCity";
 import CityCard from "../cityCard/cityCard";
 
 import { CircularProgress } from "@material-ui/core";
@@ -53,27 +53,28 @@ const CityList = () => {
   };
 
   return (
-    <div className="tableWrapper">
+    <div>
       <div className="container">
-        <div className="addCity">
-          <button
-            type="button"
-            onClick={() => {
-              if (citiesNormIds) addCitiesHandler(citiesNormIds);
-            }}
-          >
-            add
-          </button>
+        <div className="titleWrapper">
+          <h1 className="title">Cities weather</h1>
         </div>
-        <h1>Cities list</h1>
+        <div className="addCity">
+          <AddCity
+            addCitiesHandler={addCitiesHandler}
+            citiesNorm={citiesNorm}
+            citiesNormIds={citiesNormIds.filter((id) =>
+              viewedCitiesIds?.length ? !viewedCitiesIds.includes(id) : true
+            )}
+          />
+        </div>
         {loading ? <CircularProgress /> : null}
         {error ? <h1>Sorry, an error occurred</h1> : null}
         <div className="cards">
           {!error && !loading && viewedCitiesIds
             ? viewedCitiesIds.map((id) => (
                 <CityCard
-                  city={citiesNorm[id]}
-                  key={citiesNorm[id].id}
+                  city={citiesNorm?.[id]}
+                  key={id}
                   className="cityCardWrapper"
                   deleteCitiesHandler={deleteCitiesHandler}
                 />

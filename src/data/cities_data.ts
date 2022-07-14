@@ -1,5 +1,76 @@
 import { ICity } from "../types/city_types";
+
 export const cities: ICity[] = [
+  {
+    id: 689558,
+    name: "Vinnytsia",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 28.48097,
+      lat: 49.23278,
+    },
+  },
+  {
+    id: 689559,
+    name: "Vinnyts’ka Oblast’",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 29.0,
+      lat: 49.0,
+    },
+  },
+  {
+    id: 689584,
+    name: "Vil’nyans’k",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 35.43539,
+      lat: 47.94381,
+    },
+  },
+  {
+    id: 689595,
+    name: "Vilino",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 33.671612,
+      lat: 44.8456,
+    },
+  },
+  {
+    id: 689717,
+    name: "Veselynove",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 31.23488,
+      lat: 47.356659,
+    },
+  },
+  {
+    id: 689736,
+    name: "Vesele",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 34.915039,
+      lat: 47.01479,
+    },
+  },
+  {
+    id: 689738,
+    name: "Vesyoloye",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 34.318588,
+      lat: 45.593929,
+    },
+  },
   {
     id: 461727,
     name: "Olenevka",
