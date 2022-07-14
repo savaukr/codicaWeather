@@ -10,7 +10,7 @@ import "./addCity.css";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 320,
+    minWidth: 300,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
