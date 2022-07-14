@@ -52,7 +52,9 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
   };
 
   const deleteCity = async () => {
+    setIsloading(true);
     deleteCitiesHandler(city.id);
+    setIsloading(false);
   };
 
   return (
@@ -81,6 +83,7 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
             </div>
             <div>{fullCity?.weather ? fullCity.weather[0].main : null}</div>
             <Button
+              disabled={isLoading}
               variant="contained"
               onClick={(event) => {
                 event.stopPropagation();
@@ -92,6 +95,7 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
               Update
             </Button>
             <Button
+              disabled={isLoading}
               variant="outlined"
               onClick={(event) => {
                 event.stopPropagation();
