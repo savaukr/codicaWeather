@@ -1,6 +1,6 @@
 {
   "homepage": "https://savaukr.github.io/codicaWeather",
-  "name": "react-redux-ts-course",
+  "name": "codicaWeather",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
