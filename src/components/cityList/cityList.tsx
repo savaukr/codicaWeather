@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import { normalizeData } from "../../helpers/normalizeData";
 
@@ -31,26 +31,32 @@ const CityList = () => {
     if (ids) setViewedCitiesIds(JSON.parse(ids));
   }, []);
 
-  const addCitiesHandler = (ids: number[]) => {
-    if (viewedCitiesIds) {
-      setViewedCitiesIds([...viewedCitiesIds, ...ids]);
-      localStorage.setItem(
-        "viewedCitiesIds",
-        JSON.stringify([...viewedCitiesIds, ...ids])
-      );
-    } else {
-      setViewedCitiesIds(ids);
-      localStorage.setItem("viewedCitiesIds", JSON.stringify(ids));
-    }
-  };
+  const addCitiesHandler = useCallback(
+    (ids: number[]) => {
+      if (viewedCitiesIds) {
+        setViewedCitiesIds([...viewedCitiesIds, ...ids]);
+        localStorage.setItem(
+          "viewedCitiesIds",
+          JSON.stringify([...viewedCitiesIds, ...ids])
+        );
+      } else {
+        setViewedCitiesIds(ids);
+        localStorage.setItem("viewedCitiesIds", JSON.stringify(ids));
+      }
+    },
+    [viewedCitiesIds]
+  );
 
-  const deleteCitiesHandler = (cityId: number) => {
-    if (viewedCitiesIds) {
-      const filterIds = viewedCitiesIds.filter((id) => id !== cityId);
-      setViewedCitiesIds(filterIds);
-      localStorage.setItem("viewedCitiesIds", JSON.stringify(filterIds));
-    }
-  };
+  const deleteCitiesHandler = useCallback(
+    (cityId: number) => {
+      if (viewedCitiesIds) {
+        const filterIds = viewedCitiesIds.filter((id) => id !== cityId);
+        setViewedCitiesIds(filterIds);
+        localStorage.setItem("viewedCitiesIds", JSON.stringify(filterIds));
+      }
+    },
+    [viewedCitiesIds]
+  );
 
   return (
     <div>

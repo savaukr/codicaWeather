@@ -351,4 +351,34 @@ export const cities: ICity[] = [
       lat: 50.481079,
     },
   },
+  {
+    id: 688373,
+    name: "Yasynuvata",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 37.859402,
+      lat: 48.129799,
+    },
+  },
+  {
+    id: 696643,
+    name: "Poltava",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 34.54073,
+      lat: 49.593731,
+    },
+  },
+  {
+    id: 697637,
+    name: "Pereiaslav-Khmelnytskyi",
+    state: "",
+    country: "UA",
+    coord: {
+      lon: 31.4795,
+      lat: 50.087681,
+    },
+  },
 ];
