@@ -40,7 +40,7 @@ export default function AddCity({
   };
 
   return (
-    <div className="addCityWrapper">
+    <div className="addCityWrapper" data-testId="addCity">
       <FormControl variant="filled" className={classes.formControl}>
         <InputLabel htmlFor="filled-age-native-simple">City</InputLabel>
         <Select

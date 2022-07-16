@@ -63,6 +63,7 @@ const CityCard = ({ city, className, deleteCitiesHandler }: Props) => {
       onClick={() => {
         navigate(`/city/${city.id}`);
       }}
+      data-testId="cityCard"
     >
       <Card>
         {!isLoading && fullCity ? (
