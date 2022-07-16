@@ -2,9 +2,11 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 25px;
 }
 @media (max-width: 540px) {
   .addCityWrapper {
     flex-direction: column;
+    padding-left: 0px;
   }
 }
