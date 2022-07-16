@@ -1,6 +1,6 @@
 {
-  "homepage": "https://savaukr.github.io/codicaWeather",
-  "name": "codicaWeather",
+  "homepage": "https://savaukr.github.io/codicaWeather/",
+  "name": "codicaweather",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
