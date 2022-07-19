@@ -8,7 +8,6 @@ import { Button } from "@material-ui/core";
 import { CircularProgress } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -98,7 +97,6 @@ const CityDetails = () => {
                     Wind
                   </ListSubheader>
                 }
-                // className={classes.root}
               >
                 <ListItem>
                   <ListItemIcon></ListItemIcon>
